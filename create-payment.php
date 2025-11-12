@@ -4,7 +4,12 @@
  * Allow students to create payment links
  */
 
-require_once __DIR__ . '/vendor/autoload.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Include required files directly
+require_once __DIR__ . '/Database.php';
+require_once __DIR__ . '/Models/Student.php';
 
 use Models\Student;
 use Exception;
@@ -380,7 +385,7 @@ if ($studentId) {
         function redirectWithStudentId() {
             const studentId = document.getElementById('studentIdInput').value;
             if (studentId) {
-                window.location.href = '/create-payment.php?student_id=' + encodeURIComponent(studentId);
+                window.location.href = 'create-payment.php?student_id=' + encodeURIComponent(studentId);
             }
         }
         
@@ -400,7 +405,7 @@ if ($studentId) {
             document.getElementById('paymentForm').style.display = 'none';
             
             try {
-                const response = await fetch('/api/create-payment-link.php', {
+                const response = await fetch('api/create-payment-link.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -4,8 +4,15 @@
  * Display student information and payment status
  */
 
-require_once __DIR__ . '/vendor/autoload.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+// Include required files directly
+require_once __DIR__ . '/Database.php';
+require_once __DIR__ . '/Models/Student.php';
+require_once __DIR__ . '/Models/Payment.php';
+
+use Database\Database;
 use Models\Student;
 use Models\Payment;
 use Exception;
@@ -328,7 +335,7 @@ try {
                 <div class="section-header">
                     <h2 class="section-title">Student Information</h2>
                     <?php if ($student['balance_amount'] > 0): ?>
-                    <a href="/create-payment.php?student_id=<?php echo urlencode($studentId); ?>" class="btn btn-primary">
+                    <a href="create-payment.php?student_id=<?php echo urlencode($studentId); ?>" class="btn btn-primary">
                         Make Payment
                     </a>
                     <?php endif; ?>
